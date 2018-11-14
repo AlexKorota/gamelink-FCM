@@ -48,6 +48,7 @@ func (a *App) GetMessage() {
 	_, err := a.nc.Subscribe(config.NatsFirebaseChan, func(m *nats.Msg) {
 		err := proto.Unmarshal(m.Data, &msgStruct)
 		if err != nil {
+			log.Fatal(err)
 			return
 		}
 		a.mchan <- msgStruct
