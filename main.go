@@ -16,13 +16,11 @@ func init() {
 	}
 }
 
-//const app = "test-431ca"
-
 func main() {
 	ctx := context.Background()
 	a := app.NewApp()
-	a.ConnectNats()						//Нужны ли горутины?
-	a.ConnectFirebaseMessaging(ctx)		//Нужны ли горутины?
+	a.ConnectNats()
+	a.ConnectFirebaseMessaging(ctx)
 
 	a.GetMessage()
 }

@@ -11,19 +11,18 @@ import (
 var (
 	//NatsDialAddress - dial address for nats
 	NatsDialAddress string
-	//NatsChan - nats chan
-	NatsChan string
+	//NatsFirebaseChan NATS Chan for firebase push
+	NatsFirebaseChan string
 	//ServiceKeyPAth - path to json service google key
 	ServiceKeyPath string
 )
 
-
 const (
-	modeKey       = "MODE"
-	devMode       = "development"
-	natsDial      = "NATSDIAL"
-	natsChan	  = "NATSHCHAN"
-	servicekeypath= "SKEYPATH"
+	modeKey             = "MODE"
+	devMode             = "development"
+	natsDial            = "NATSDIAL"
+	natsFirebaseChannel = "NATSCHANFIREBASE"
+	servicekeypath      = "SKEYPATH"
 )
 
 func init() {
@@ -42,7 +41,6 @@ func GetEnvironment() string {
 //IsDevelopmentEnv - this function try to get mode environment and check it is development
 func IsDevelopmentEnv() bool { return GetEnvironment() == devMode }
 
-
 func LoadEnvironment() {
 	wd, err := os.Getwd()
 	if err != nil {
@@ -56,9 +54,9 @@ func LoadEnvironment() {
 	if NatsDialAddress == "" {
 		log.Fatal("nats dial address must be set")
 	}
-	NatsChan = os.Getenv(natsChan)
-	if NatsChan == ""{
-		log.Fatal("nats channel must be set")
+	NatsFirebaseChan = os.Getenv(natsFirebaseChannel)
+	if NatsFirebaseChan == "" {
+		log.Fatal("nats firebase chan must be set")
 	}
 	ServiceKeyPath = os.Getenv(servicekeypath)
 	if ServiceKeyPath == "" {
