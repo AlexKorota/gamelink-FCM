@@ -29,7 +29,7 @@ func init() {
 	LoadEnvironment()
 }
 
-//GetEnvironment - this function returns mode string of the os environment or "development" mode if empty or not defined
+//GetEnvironment - this function returns mode string of the os environment or "deployment.yaml" mode if empty or not defined
 func GetEnvironment() string {
 	var env string
 	if env = os.Getenv(modeKey); env == "" {
@@ -38,7 +38,7 @@ func GetEnvironment() string {
 	return env
 }
 
-//IsDevelopmentEnv - this function try to get mode environment and check it is development
+//IsDevelopmentEnv - this function try to get mode environment and check it is deployment.yaml
 func IsDevelopmentEnv() bool { return GetEnvironment() == devMode }
 
 func LoadEnvironment() {

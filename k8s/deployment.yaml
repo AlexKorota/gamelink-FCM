@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gamelink-fcm
+  labels:
+    app: gamelink-fcm
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gamelink-fcm
+    spec:
+      containers:
+        - name: gamelink-fcm
+          #          image: 'registry.gitlab.smedialink.com/z/...'
+          image: 'mrcarrot/gamelink-fcm:latest'
+          volumeMounts:
+            - name: key
+              mountPath: "/etc/key"
+              readOnly: true
+          env:
+          - name: NATSDIAL
+            valueFrom:
+              configMapKeyRef:
+                name: gamelink-config
+                key: NATSDIAL
+          - name: NATSCHANFIREBASE
+            valueFrom:
+              configMapKeyRef:
+                name: gamelink-config
+                key: NATSCHANFIREBASE
+          - name: SKEYPATH
+            valueFrom:
+              configMapKeyRef:
+                name: gamelink-fcm-config
+                key: SKEYPATH
+      volumes:
+        - name: key
+          secret:
+            secretName: firebase-key

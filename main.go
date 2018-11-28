@@ -1,9 +1,10 @@
 package main
 
 import (
-	"FCMTestClient/app"
-	"FCMTestClient/config"
 	"context"
+	"gamelink-fcm/app"
+	"gamelink-fcm/config"
+	"gamelink-fcm/version"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -17,6 +18,10 @@ func init() {
 }
 
 func main() {
+	log.Printf(
+		"Starting the service: commit: %s, build time: %s, release: %s",
+		version.Commit, version.BuildTime, version.Release,
+	)
 	ctx := context.Background()
 	a := app.NewApp()
 	a.ConnectNats()

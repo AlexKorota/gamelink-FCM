@@ -1,11 +1,11 @@
 package app
 
 import (
-	"FCMTestClient/config"
 	"context"
 	"firebase.google.com/go"
 	"firebase.google.com/go/messaging"
 	"fmt"
+	"gamelink-fcm/config"
 	push "gamelink-go/proto_nats_msg"
 	"github.com/gogo/protobuf/proto"
 	"github.com/nats-io/go-nats"
@@ -68,6 +68,7 @@ func (a *App) prepareAndSend(msg push.PushMsgStruct) {
 		Data: map[string]string{
 			"message": msg.Message,
 		},
+
 		Token: msg.UserInfo.DeviceID,
 	}
 	fmt.Println("prepared", message)

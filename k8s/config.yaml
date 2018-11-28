@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gamelink-fcm-config
+  namespace: default
+data:
+  SKEYPATH: "/etc/key/rocket-x-firebase-adminsdk.json"
